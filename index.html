@@ -3,26 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diapositiva 01</title>
+    <title>Diapositiva 02</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         :root {
             --bg-deep: #030a12;
             --bg-dark: #06111f;
-            --bg-mid: #0b1b33;
             --blue-primary: #0a6fdd;
             --blue-glow: #1a8cff;
-            --blue-light: #4da6ff;
             --cyan-accent: #00d4ff;
             --accent-green: #00e676;
-            --accent-amber: #ffb300;
-            --accent-red: #ff5252;
             --text-primary: #dce8ff;
             --text-secondary: #7a9cc0;
             --text-muted: #3e5f82;
-            --card-bg: rgba(6, 17, 31, 0.88);
-            --border-glow: rgba(26, 140, 255, 0.18);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -92,11 +86,7 @@
             gap: 4px;
         }
 
-        .led {
-            width: 3px; height: 3px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
+        .led { width: 3px; height: 3px; border-radius: 50%; flex-shrink: 0; }
         .led-g { background: var(--accent-green); box-shadow: 0 0 3px var(--accent-green); animation: lp 2s ease-in-out infinite; }
         .led-b { background: var(--blue-glow); box-shadow: 0 0 3px var(--blue-glow); animation: lp 3s ease-in-out infinite .5s; }
         .led-o { background: #ff9100; box-shadow: 0 0 3px #ff9100; animation: lb 1.5s ease-in-out infinite; }
@@ -135,21 +125,36 @@
             filter: blur(50px);
         }
 
-        /* ===== SLIDE ===== */
-        .slide {
+        /* ===== SLIDES ===== */
+        .slides-wrapper {
             position: relative;
             z-index: 10;
             height: 100vh;
+            width: 100%;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 80px 100px;
-            animation: slideIn 1s ease-out;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.7s ease, transform 0.7s ease;
+            transform: translateY(30px);
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .slide.exit-up {
+            opacity: 0;
+            transform: translateY(-30px);
         }
 
         .slide-content {
@@ -157,13 +162,6 @@
             font-size: clamp(14px, 1.15vw, 16.5px);
             line-height: 1.9;
             color: var(--text-secondary);
-            opacity: 0;
-            animation: contentIn 1.2s ease-out 0.3s forwards;
-        }
-
-        @keyframes contentIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .slide-content strong {
@@ -291,17 +289,35 @@
         <span>07</span>
     </div>
 
-    <main class="slide">
-        <div class="slide-content">
-            El autor sostiene que la capacidad de generar código a velocidades masivas es una ventaja competitiva, pero también un riesgo sistémico porque la IA carece de contexto de negocio y sentido de responsabilidad. Por lo tanto, el mensaje principal se articula en tres pilares:
-            <span class="sep"></span>
-            <strong>La IA como generadora, el humano como responsable:</strong> Se enfatiza el Principio de Responsabilidad Profesional, donde el desarrollador es el único responsable legal y profesional del código en producción. La IA genera código rápido, pero no lo <em>"entiende" profundamente</em>.
-            <span class="sep"></span>
-            <strong>El Testing y CI/CD como barreras obligatorias:</strong> Dado que el ritmo de cambio de la IA supera la capacidad de revisión humana manual, es imperativo implementar procesos automáticos de Integración Continua (CI) y Testing. Sin tests, el desarrollo con IA es descrito como <em>"construir sobre arena"</em> o aceptar una <em>"deuda técnica por diseño"</em>.
-            <span class="sep"></span>
-            <strong>Orquestación sobre codificación:</strong> El autor propone que el futuro del desarrollo pertenece a quienes sepan orquestar herramientas inteligentes (como agentes de revisión de código, revisiones de seguridad automáticas con Claude y automatización de lanzamientos) para guiar la tecnología hacia sistemas escalables y seguros.
-        </div>
-    </main>
+    <div class="slides-wrapper">
+
+        <!-- Diapositiva 01 -->
+        <section class="slide active" data-slide="0">
+            <div class="slide-content">
+                El autor sostiene que la capacidad de generar código a velocidades masivas es una ventaja competitiva, pero también un riesgo sistémico porque la IA carece de contexto de negocio y sentido de responsabilidad. Por lo tanto, el mensaje principal se articula en tres pilares:
+                <span class="sep"></span>
+                <strong>La IA como generadora, el humano como responsable:</strong> Se enfatiza el Principio de Responsabilidad Profesional, donde el desarrollador es el único responsable legal y profesional del código en producción. La IA genera código rápido, pero no lo <em>"entiende" profundamente</em>.
+                <span class="sep"></span>
+                <strong>El Testing y CI/CD como barreras obligatorias:</strong> Dado que el ritmo de cambio de la IA supera la capacidad de revisión humana manual, es imperativo implementar procesos automáticos de Integración Continua (CI) y Testing. Sin tests, el desarrollo con IA es descrito como <em>"construir sobre arena"</em> o aceptar una <em>"deuda técnica por diseño"</em>.
+                <span class="sep"></span>
+                <strong>Orquestación sobre codificación:</strong> El autor propone que el futuro del desarrollo pertenece a quienes sepan orquestar herramientas inteligentes (como agentes de revisión de código, revisiones de seguridad automáticas con Claude y automatización de lanzamientos) para guiar la tecnología hacia sistemas escalables y seguros.
+            </div>
+        </section>
+
+        <!-- Diapositiva 02 -->
+        <section class="slide" data-slide="1">
+            <div class="slide-content">
+                Para el autor, la <em>"textura"</em> de una propuesta de software exitosa se compone de:
+                <span class="sep"></span>
+                <strong>Rigidez:</strong> Aportada por los tests que blindan el valor de negocio.
+                <span class="sep"></span>
+                <strong>Fluidez:</strong> Aportada por el CI/CD, que permite que el código llegue a producción <em>"solo"</em>, sin fricciones manuales.
+                <span class="sep"></span>
+                <strong>Transparencia:</strong> Lograda a través de revisiones automáticas de seguridad y agentes de IA que revisan la lógica del sistema.
+            </div>
+        </section>
+
+    </div>
 
     <nav class="slide-nav" aria-label="Navegación de diapositivas">
         <div class="nav-dot active"></div>
@@ -316,6 +332,7 @@
     <div class="watermark" aria-hidden="true">InfraTech</div>
 
     <script>
+        /* ===== Racks ===== */
         function fillRack(el, n) {
             const types = ['led-g','led-b','led-o','led-off'];
             for (let i = 0; i < n; i++) {
@@ -341,6 +358,7 @@
         fillRack(document.getElementById('rackL'), 32);
         fillRack(document.getElementById('rackR'), 32);
 
+        /* ===== Cables ===== */
         const cablesEl = document.getElementById('cables');
         for (let i = 0; i < 10; i++) {
             const c = document.createElement('div');
@@ -353,6 +371,7 @@
             cablesEl.appendChild(c);
         }
 
+        /* ===== Partículas ===== */
         const particlesEl = document.getElementById('particles');
         for (let i = 0; i < 25; i++) {
             const p = document.createElement('div');
@@ -364,26 +383,60 @@
             particlesEl.appendChild(p);
         }
 
+        /* ===== Navegación entre diapositivas ===== */
+        const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.nav-dot');
-        let currentSlide = 0;
+        const indicatorCurrent = document.querySelector('.slide-indicator .current');
+        const totalSlides = 7;
+        let current = 0;
 
-        function setActiveDot(idx) {
+        function goTo(idx) {
+            if (idx < 0 || idx >= slides.length || idx === current) return;
+
+            const direction = idx > current ? 'up' : 'down';
+
+            // Salida de la actual
+            slides[current].classList.remove('active');
+            slides[current].classList.add(direction === 'up' ? 'exit-up' : '');
+            slides[current].style.transform = direction === 'up' ? 'translateY(-30px)' : 'translateY(30px)';
+            slides[current].style.opacity = '0';
+
+            // Preparar la nueva
+            slides[idx].style.transition = 'none';
+            slides[idx].style.transform = direction === 'up' ? 'translateY(30px)' : 'translateY(-30px)';
+            slides[idx].style.opacity = '0';
+            slides[idx].classList.remove('exit-up');
+
+            // Forzar reflow
+            void slides[idx].offsetHeight;
+
+            slides[idx].style.transition = '';
+            slides[idx].classList.add('active');
+
+            // Limpiar la anterior después de la transición
+            const prev = current;
+            setTimeout(() => {
+                slides[prev].classList.remove('exit-up');
+                slides[prev].style.transform = '';
+                slides[prev].style.opacity = '';
+            }, 700);
+
+            current = idx;
             dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+            indicatorCurrent.textContent = String(idx + 1).padStart(2, '0');
         }
 
         document.addEventListener('keydown', e => {
-            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
                 e.preventDefault();
-                if (currentSlide < dots.length - 1) { currentSlide++; setActiveDot(currentSlide); }
+                goTo(current + 1);
             } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
                 e.preventDefault();
-                if (currentSlide > 0) { currentSlide--; setActiveDot(currentSlide); }
+                goTo(current - 1);
             }
         });
 
-        dots.forEach((d, i) => {
-            d.addEventListener('click', () => { currentSlide = i; setActiveDot(currentSlide); });
-        });
+        dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
     </script>
 </body>
 </html>
