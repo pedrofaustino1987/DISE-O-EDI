@@ -17,8 +17,6 @@
             --text-primary: #dce8ff;
             --text-secondary: #7a9cc0;
             --text-muted: #3e5f82;
-            --card-bg: rgba(6, 17, 31, 0.75);
-            --border-glow: rgba(26, 140, 255, 0.12);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -127,7 +125,6 @@
             filter: blur(50px);
         }
 
-        /* ===== SLIDES ===== */
         .slides-wrapper {
             position: relative;
             z-index: 10;
@@ -180,129 +177,10 @@
             max-width: 400px;
         }
 
-        /* ===== Cuadro 2x2 ===== */
-        .s3-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-            gap: 14px;
-            width: 100%;
-            max-width: 840px;
-            height: clamp(380px, 68vh, 580px);
-        }
+        .slide-content .c-red { color: #ff5252; font-weight: 600; }
+        .slide-content .c-amber { color: #ffb300; font-weight: 600; }
+        .slide-content .c-green { color: #00e676; font-weight: 600; }
 
-        .s3-cell {
-            padding: 18px 20px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-glow);
-            border-radius: 12px;
-            backdrop-filter: blur(8px);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            font-size: clamp(11px, 0.88vw, 13px);
-            line-height: 1.65;
-            color: var(--text-secondary);
-        }
-
-        .s3-cell::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-        }
-
-        .s3-cell::after {
-            content: '';
-            position: absolute;
-            bottom: -40px; right: -40px;
-            width: 120px; height: 120px;
-            border-radius: 50%;
-            opacity: 0.035;
-            pointer-events: none;
-        }
-
-        .s3-cell-1::before { background: linear-gradient(90deg, #ff5252 0%, #ffb300 50%, #00e676 100%); }
-        .s3-cell-1::after { background: linear-gradient(135deg, #ff5252, #ffb300, #00e676); }
-        .s3-cell-2::before { background: #00e676; }
-        .s3-cell-2::after { background: #00e676; }
-        .s3-cell-3::before { background: linear-gradient(90deg, #1a1a2e, #3e5f82); }
-        .s3-cell-3::after { background: #3e5f82; }
-        .s3-cell-4::before { background: linear-gradient(90deg, #00d4ff, #e040fb); }
-        .s3-cell-4::after { background: linear-gradient(135deg, #00d4ff, #e040fb); }
-
-        .s3-color-name {
-            font-size: 1.1em;
-            font-weight: 700;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-shrink: 0;
-        }
-
-        .s3-cell-1 .s3-color-name { color: #ffb300; }
-        .s3-cell-2 .s3-color-name { color: #00e676; }
-        .s3-cell-3 .s3-color-name { color: #7a9cc0; }
-        .s3-cell-4 .s3-color-name { color: #00d4ff; }
-
-        .s3-dots {
-            display: flex;
-            gap: 5px;
-        }
-
-        .s3-dot {
-            width: 8px; height: 8px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .s3-sense-label {
-            font-size: 0.8em;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            margin-bottom: 6px;
-            flex-shrink: 0;
-        }
-
-        .s3-cell em {
-            color: var(--text-primary);
-            font-style: italic;
-            font-weight: 500;
-        }
-
-        .s3-sub {
-            display: block;
-            margin-bottom: 6px;
-            padding-bottom: 6px;
-            border-bottom: 1px solid rgba(10,111,221,0.05);
-        }
-
-        .s3-sub:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-
-        .s3-sub-label {
-            font-size: 0.92em;
-            font-weight: 700;
-            margin-right: 4px;
-        }
-
-        .s3-sl-red { color: #ff5252; }
-        .s3-sl-amber { color: #ffb300; }
-        .s3-sl-green { color: #00e676; }
-
-        .s3-text-block {
-            flex: 1;
-            overflow: hidden;
-        }
-
-        /* Indicador */
         .slide-indicator {
             position: fixed;
             top: 28px;
@@ -371,16 +249,15 @@
         }
 
         @media (max-width: 1100px) {
-            .slide { padding: 70px 40px; }
+            .slide { padding: 70px 50px; }
             .rack-left, .rack-right { width: 90px; }
         }
 
         @media (max-width: 700px) {
-            .slide { padding: 70px 18px 70px; }
+            .slide { padding: 70px 20px 70px; }
             .rack-left, .rack-right { display: none; }
             .watermark { display: none; }
             .slide-indicator { font-size: 9px; }
-            .s3-grid { grid-template-columns: 1fr; height: auto; max-width: 500px; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -438,58 +315,15 @@
 
         <!-- Diapositiva 03 -->
         <section class="slide" data-slide="2">
-            <div class="s3-grid">
-                <div class="s3-cell s3-cell-1">
-                    <div class="s3-color-name">
-                        <span class="s3-dots">
-                            <span class="s3-dot" style="background:#ff5252;box-shadow:0 0 6px #ff5252"></span>
-                            <span class="s3-dot" style="background:#ffb300;box-shadow:0 0 6px #ffb300"></span>
-                            <span class="s3-dot" style="background:#00e676;box-shadow:0 0 6px #00e676"></span>
-                        </span>
-                        Rojo, Amarillo, Verde
-                    </div>
-                    <div class="s3-sense-label">Sentido</div>
-                    <div class="s3-text-block">
-                        <span class="s3-sub"><span class="s3-sub-label s3-sl-red">Rojo (Lo Crítico):</span> Se utiliza para resaltar elementos donde el error es inaceptable, como la autenticación y la lógica de negocio principal. Aporta un sentido de alerta y máxima prioridad.</span>
-                        <span class="s3-sub"><span class="s3-sub-label s3-sl-amber">Amarillo (Lo Importante):</span> Identifica zonas que requieren atención humana, específicamente casos de borde o código generado por IA que el humano no termina de comprender. Aporta un sentido de precaución y revisión necesaria.</span>
-                        <span class="s3-sub"><span class="s3-sub-label s3-sl-green">Verde (Lo Delegable):</span> Representa áreas de bajo riesgo, como funciones simples o <em>"helpers"</em>, donde se puede confiar más en la automatización de la IA. Comunica seguridad y fluidez.</span>
-                    </div>
-                </div>
-                <div class="s3-cell s3-cell-2">
-                    <div class="s3-color-name">
-                        <span class="s3-dot" style="background:#00e676;box-shadow:0 0 8px #00e676;width:10px;height:10px"></span>
-                        Verde brillante
-                    </div>
-                    <div class="s3-sense-label">Sentido</div>
-                    <div class="s3-text-block">
-                        <span class="s3-sub"><span class="s3-sub-label s3-sl-green">Sentido:</span> Representa la aprobación del <em>"Guardia Automático"</em> (el CI/CD).</span>
-                        <span class="s3-sub"><span class="s3-sub-label s3-sl-green">Comunicación:</span> Se observa en capturas de pantalla de GitHub Actions, donde el mensaje <em>"All checks have passed"</em> y los iconos verdes indican que el código es seguro para ser integrado.</span>
-                    </div>
-                </div>
-                <div class="s3-cell s3-cell-3">
-                    <div class="s3-color-name">
-                        <span class="s3-dot" style="background:#0d0d1a;border:1px solid #3e5f82;width:10px;height:10px"></span>
-                        <span class="s3-dot" style="background:#3e5f82;width:10px;height:10px"></span>
-                        Negro y Gris Oscuro
-                    </div>
-                    <div class="s3-sense-label">Sentido</div>
-                    <div class="s3-text-block">
-                        <span class="s3-sub"><span class="s3-sub-label" style="color:#7a9cc0">Diferenciación:</span> Separa el contenido educativo del "ruido" visual, imitando la interfaz de un entorno de desarrollo (IDE) como Cursor o VS Code.</span>
-                        <span class="s3-sub"><span class="s3-sub-label" style="color:#7a9cc0">Comunicación:</span> Transmite un tono de profesionalismo y rigor técnico, alineado con el <em>"Principio de Responsabilidad Profesional"</em> que menciona el autor.</span>
-                    </div>
-                </div>
-                <div class="s3-cell s3-cell-4">
-                    <div class="s3-color-name">
-                        <span class="s3-dot" style="background:#00d4ff;box-shadow:0 0 6px #00d4ff;width:10px;height:10px"></span>
-                        <span class="s3-dot" style="background:#e040fb;box-shadow:0 0 6px #e040fb;width:10px;height:10px"></span>
-                        Cian y Magenta
-                    </div>
-                    <div class="s3-sense-label">Sentido</div>
-                    <div class="s3-text-block">
-                        <span class="s3-sub"><span class="s3-sub-label" style="color:#00d4ff">Aporte:</span> Sirven para la diferenciación de marca y para destacar conceptos clave como <em>"Desarrollo con IA"</em>.</span>
-                        <span class="s3-sub"><span class="s3-sub-label" style="color:#00d4ff">Sentido:</span> Crean una estética moderna y tecnológica, reforzando la idea de que la IA es el nuevo estándar operativo en la ingeniería de software.</span>
-                    </div>
-                </div>
+            <div class="slide-content">
+                <strong>El Semáforo de Prioridades (Rojo, Amarillo, Verde)</strong><br>
+                En la sección sobre <em>"¿Qué testear cuando programas con IA?"</em>, el autor utiliza un esquema de colores para diferenciar niveles de riesgo y delegación:
+                <span class="sep"></span>
+                <span class="c-red">Rojo (Lo Crítico):</span> Se utiliza para resaltar elementos donde el error es inaceptable, como la autenticación y la lógica de negocio principal. Aporta un sentido de alerta y máxima prioridad.
+                <span class="sep"></span>
+                <span class="c-amber">Amarillo (Lo Importante):</span> Identifica zonas que requieren atención humana, específicamente casos de borde o código generado por IA que el humano no termina de comprender. Aporta un sentido de precaución y revisión necesaria.
+                <span class="sep"></span>
+                <span class="c-green">Verde (Lo Delegable):</span> Representa áreas de bajo riesgo, como funciones simples o <em>"helpers"</em>, donde se puede confiar más en la automatización de la IA. Comunica seguridad y fluidez.
             </div>
         </section>
 
