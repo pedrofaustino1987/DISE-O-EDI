@@ -141,20 +141,15 @@
             justify-content: center;
             padding: 80px 100px;
             opacity: 0;
+            transform: translateY(40px);
             pointer-events: none;
             transition: opacity 0.7s ease, transform 0.7s ease;
-            transform: translateY(30px);
         }
 
         .slide.active {
             opacity: 1;
-            pointer-events: auto;
             transform: translateY(0);
-        }
-
-        .slide.exit-up {
-            opacity: 0;
-            transform: translateY(-30px);
+            pointer-events: auto;
         }
 
         .slide-content {
@@ -387,46 +382,42 @@
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.nav-dot');
         const indicatorCurrent = document.querySelector('.slide-indicator .current');
-        const totalSlides = 7;
         let current = 0;
+        let transitioning = false;
 
         function goTo(idx) {
-            if (idx < 0 || idx >= slides.length || idx === current) return;
+            if (idx < 0 || idx >= slides.length || idx === current || transitioning) return;
 
-            const direction = idx > current ? 'up' : 'down';
+            transitioning = true;
+            const direction = idx > current ? 1 : -1;
+            const oldSlide = slides[current];
+            const newSlide = slides[idx];
 
-            // Salida de la actual
-            slides[current].classList.remove('active');
-            slides[current].classList.add(direction === 'up' ? 'exit-up' : '');
-            slides[current].style.transform = direction === 'up' ? 'translateY(-30px)' : 'translateY(30px)';
-            slides[current].style.opacity = '0';
+            // Nueva slide: posición de partida sin transición
+            newSlide.style.transition = 'none';
+            newSlide.style.transform = 'translateY(' + (direction * 40) + 'px)';
+            newSlide.style.opacity = '0';
+            newSlide.classList.add('active');
 
-            // Preparar la nueva
-            slides[idx].style.transition = 'none';
-            slides[idx].style.transform = direction === 'up' ? 'translateY(30px)' : 'translateY(-30px)';
-            slides[idx].style.opacity = '0';
-            slides[idx].classList.remove('exit-up');
+            // Forzar reflow para que el navegador registre el estado inicial
+            void newSlide.offsetHeight;
 
-            // Forzar reflow
-            void slides[idx].offsetHeight;
+            // Restaurar transición y limpiar inline para que CSS de .active tome control
+            newSlide.style.transition = '';
+            newSlide.style.transform = '';
+            newSlide.style.opacity = '';
 
-            slides[idx].style.transition = '';
-            slides[idx].classList.add('active');
-
-            // Limpiar la anterior después de la transición
-            const prev = current;
-            setTimeout(() => {
-                slides[prev].classList.remove('exit-up');
-                slides[prev].style.transform = '';
-                slides[prev].style.opacity = '';
-            }, 700);
+            // Vieja slide: la transición CSS de .slide la anima al salir
+            oldSlide.classList.remove('active');
 
             current = idx;
-            dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+            dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
             indicatorCurrent.textContent = String(idx + 1).padStart(2, '0');
+
+            setTimeout(function() { transitioning = false; }, 750);
         }
 
-        document.addEventListener('keydown', e => {
+        document.addEventListener('keydown', function(e) {
             if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
                 e.preventDefault();
                 goTo(current + 1);
@@ -436,7 +427,9 @@
             }
         });
 
-        dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+        dots.forEach(function(d, i) {
+            d.addEventListener('click', function() { goTo(i); });
+        });
     </script>
 </body>
 </html>
