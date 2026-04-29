@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presentación — IA, Responsabilidad y CI/CD</title>
+    <title>Diapositiva 01</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
@@ -14,12 +14,11 @@
             --blue-primary: #0a6fdd;
             --blue-glow: #1a8cff;
             --blue-light: #4da6ff;
-            --blue-pale: #80c4ff;
             --cyan-accent: #00d4ff;
             --accent-green: #00e676;
             --accent-amber: #ffb300;
             --accent-red: #ff5252;
-            --text-primary: #e4edff;
+            --text-primary: #dce8ff;
             --text-secondary: #7a9cc0;
             --text-muted: #3e5f82;
             --card-bg: rgba(6, 17, 31, 0.88);
@@ -37,7 +36,6 @@
             width: 100vw;
         }
 
-        /* ===== FONDO DATA CENTER ===== */
         .server-bg {
             position: fixed;
             inset: 0;
@@ -65,7 +63,6 @@
             mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 10%, transparent 65%);
         }
 
-        /* Racks laterales */
         .server-rack {
             position: absolute;
             top: 4%;
@@ -109,7 +106,6 @@
         @keyframes lp { 0%,100%{opacity:1}50%{opacity:.4} }
         @keyframes lb { 0%,70%{opacity:1}75%,95%{opacity:.1}100%{opacity:1} }
 
-        /* Líneas de cable */
         .cable-line {
             position: absolute;
             height: 1px;
@@ -119,7 +115,6 @@
         }
         @keyframes cableFlow { 0%{opacity:0;transform:translateX(-100%)}50%{opacity:.12}100%{opacity:0;transform:translateX(100%)} }
 
-        /* Partículas */
         .particle {
             position: absolute;
             width: 1.5px; height: 1.5px;
@@ -130,7 +125,6 @@
         }
         @keyframes fp { 0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:.5}90%{opacity:.5}100%{transform:translateY(-10vh) scale(1);opacity:0} }
 
-        /* Luz superior */
         .top-glow {
             position: absolute;
             top: -30%;
@@ -147,11 +141,9 @@
             z-index: 10;
             height: 100vh;
             display: flex;
-            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            padding: 60px 80px;
-            max-width: 1200px;
-            margin: 0 auto;
+            padding: 80px 100px;
             animation: slideIn 1s ease-out;
         }
 
@@ -160,7 +152,40 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Indicador de slide */
+        .slide-content {
+            max-width: 920px;
+            font-size: clamp(14px, 1.15vw, 16.5px);
+            line-height: 1.9;
+            color: var(--text-secondary);
+            opacity: 0;
+            animation: contentIn 1.2s ease-out 0.3s forwards;
+        }
+
+        @keyframes contentIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-content strong {
+            color: var(--cyan-accent);
+            font-weight: 700;
+        }
+
+        .slide-content em {
+            color: var(--text-primary);
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .slide-content .sep {
+            display: block;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(0,212,255,0.15), rgba(10,111,221,0.08), transparent);
+            margin: 20px 0;
+            max-width: 400px;
+        }
+
+        /* Indicador */
         .slide-indicator {
             position: fixed;
             top: 28px;
@@ -185,202 +210,8 @@
         }
 
         .slide-indicator .line {
-            width: 40px;
-            height: 1px;
+            width: 40px; height: 1px;
             background: var(--text-muted);
-        }
-
-        /* Header de la diapositiva */
-        .slide-header {
-            margin-bottom: 12px;
-        }
-
-        .slide-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 10px;
-            font-weight: 700;
-            color: var(--cyan-accent);
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-        }
-
-        .slide-tag::before {
-            content: '';
-            width: 24px; height: 2px;
-            background: var(--cyan-accent);
-        }
-
-        .slide-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(20px, 2.4vw, 30px);
-            font-weight: 700;
-            line-height: 1.35;
-            color: var(--text-primary);
-            max-width: 900px;
-        }
-
-        .slide-title .em {
-            color: var(--cyan-accent);
-        }
-
-        /* Contexto introductorio */
-        .slide-intro {
-            font-size: clamp(13px, 1.1vw, 15px);
-            color: var(--text-secondary);
-            line-height: 1.75;
-            max-width: 860px;
-            margin-bottom: 32px;
-            border-left: 2px solid rgba(0,212,255,0.2);
-            padding-left: 20px;
-        }
-
-        .slide-intro strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        /* Tres pilares */
-        .pillars {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-bottom: 36px;
-        }
-
-        .pillar {
-            position: relative;
-            background: var(--card-bg);
-            border: 1px solid var(--border-glow);
-            border-radius: 14px;
-            padding: 24px 22px;
-            backdrop-filter: blur(12px);
-            overflow: hidden;
-            transition: border-color 0.4s, transform 0.4s;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: pillarIn 0.7s ease-out forwards;
-        }
-
-        .pillar:nth-child(1) { animation-delay: 0.3s; }
-        .pillar:nth-child(2) { animation-delay: 0.5s; }
-        .pillar:nth-child(3) { animation-delay: 0.7s; }
-
-        @keyframes pillarIn {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .pillar::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 2px;
-            border-radius: 14px 14px 0 0;
-        }
-
-        .pillar-1::before { background: linear-gradient(90deg, var(--accent-red), var(--accent-amber)); }
-        .pillar-2::before { background: linear-gradient(90deg, var(--accent-amber), var(--accent-green)); }
-        .pillar-3::before { background: linear-gradient(90deg, var(--accent-green), var(--cyan-accent)); }
-
-        .pillar:hover {
-            border-color: rgba(0,212,255,0.3);
-            transform: translateY(-3px);
-        }
-
-        .pillar-num {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-        }
-
-        .pillar-1 .pillar-num { color: var(--accent-red); }
-        .pillar-2 .pillar-num { color: var(--accent-amber); }
-        .pillar-3 .pillar-num { color: var(--accent-green); }
-
-        .pillar-icon {
-            width: 40px; height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            font-size: 16px;
-            margin-bottom: 14px;
-        }
-
-        .pillar-1 .pillar-icon { background: rgba(255,82,82,0.1); color: var(--accent-red); }
-        .pillar-2 .pillar-icon { background: rgba(255,179,0,0.1); color: var(--accent-amber); }
-        .pillar-3 .pillar-icon { background: rgba(0,230,118,0.1); color: var(--accent-green); }
-
-        .pillar-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
-
-        .pillar-text {
-            font-size: 12px;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        .pillar-text em {
-            font-style: italic;
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-
-        /* Resumen final */
-        .slide-summary {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            padding: 20px 24px;
-            background: linear-gradient(135deg, rgba(0,212,255,0.06), rgba(10,111,221,0.04));
-            border: 1px solid rgba(0,212,255,0.12);
-            border-radius: 12px;
-            max-width: 900px;
-            opacity: 0;
-            animation: pillarIn 0.7s ease-out 1s forwards;
-        }
-
-        .summary-icon {
-            width: 36px; height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0,212,255,0.1);
-            border-radius: 8px;
-            color: var(--cyan-accent);
-            font-size: 14px;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .summary-label {
-            font-size: 10px;
-            font-weight: 700;
-            color: var(--cyan-accent);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 4px;
-        }
-
-        .summary-text {
-            font-size: 13px;
-            color: var(--text-primary);
-            line-height: 1.7;
-            font-weight: 500;
-        }
-
-        .summary-text strong {
-            color: var(--cyan-accent);
-            font-weight: 700;
         }
 
         /* Navegación inferior */
@@ -400,6 +231,7 @@
             border-radius: 50%;
             background: var(--text-muted);
             transition: all 0.3s;
+            cursor: pointer;
         }
 
         .nav-dot.active {
@@ -409,7 +241,6 @@
             box-shadow: 0 0 12px rgba(0,212,255,0.4);
         }
 
-        /* Logo marca de agua */
         .watermark {
             position: fixed;
             bottom: 28px;
@@ -423,18 +254,14 @@
             text-transform: uppercase;
         }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 1100px) {
-            .slide { padding: 60px 40px; }
-            .pillars { grid-template-columns: 1fr; gap: 12px; }
-            .pillar { padding: 18px 20px; }
+            .slide { padding: 80px 50px; }
             .rack-left, .rack-right { width: 90px; }
         }
 
         @media (max-width: 700px) {
-            .slide { padding: 80px 20px 80px; }
+            .slide { padding: 80px 24px 80px; }
             .rack-left, .rack-right { display: none; }
-            .slide-nav { bottom: 16px; }
             .watermark { display: none; }
             .slide-indicator { font-size: 9px; }
         }
@@ -449,7 +276,6 @@
 </head>
 <body>
 
-    <!-- Fondo datacenter -->
     <div class="server-bg" aria-hidden="true">
         <div class="top-glow"></div>
         <div class="grid-overlay"></div>
@@ -459,70 +285,24 @@
         <div id="particles"></div>
     </div>
 
-    <!-- Indicador de diapositiva -->
     <div class="slide-indicator">
         <span class="current">01</span>
         <span class="line"></span>
         <span>07</span>
     </div>
 
-    <!-- Contenido de la diapositiva -->
-    <main class="slide" role="main">
-        <div class="slide-header">
-            <div class="slide-tag">Punto de Vista del Autor</div>
-            <h1 class="slide-title">
-                IA que genera codigo a velocidad masiva: <span class="em">ventaja competitiva o riesgo sistemico</span>
-            </h1>
-        </div>
-
-        <p class="slide-intro">
-            La capacidad de la IA para producir codigo a gran escala es una ventaja, pero también un <strong>riesgo sistémico</strong> porque carece de contexto de negocio y sentido de responsabilidad. El mensaje central se estructura en tres pilares:
-        </p>
-
-        <div class="pillars">
-            <!-- Pilar 1 -->
-            <article class="pillar pillar-1">
-                <div class="pillar-num">PILAR 01</div>
-                <div class="pillar-icon"><i class="fas fa-user-shield"></i></div>
-                <h2 class="pillar-title">La IA como generadora, el humano como responsable</h2>
-                <p class="pillar-text">
-                    Bajo el <em>Principio de Responsabilidad Profesional</em>, el desarrollador es el único responsable legal y profesional del codigo en producción. La IA genera rápido, pero no lo <em>"entiende" profundamente</em>.
-                </p>
-            </article>
-
-            <!-- Pilar 2 -->
-            <article class="pillar pillar-2">
-                <div class="pillar-num">PILAR 02</div>
-                <div class="pillar-icon"><i class="fas fa-flask-vial"></i></div>
-                <h2 class="pillar-title">Testing y CI/CD como barreras obligatorias</h2>
-                <p class="pillar-text">
-                    El ritmo de la IA supera la revision humana manual. Sin procesos automáticos de CI y Testing, el desarrollo con IA es <em>"construir sobre arena"</em> o aceptar una <em>"deuda técnica por diseño"</em>.
-                </p>
-            </article>
-
-            <!-- Pilar 3 -->
-            <article class="pillar pillar-3">
-                <div class="pillar-num">PILAR 03</div>
-                <div class="pillar-icon"><i class="fas fa-sitemap"></i></div>
-                <h2 class="pillar-title">Orquestacion sobre codificacion</h2>
-                <p class="pillar-text">
-                    El futuro pertenece a quienes sepan <em>orquestar herramientas inteligentes</em>: agentes de revision de codigo, análisis de seguridad automático y automatización de lanzamientos hacia sistemas escalables y seguros.
-                </p>
-            </article>
-        </div>
-
-        <div class="slide-summary">
-            <div class="summary-icon"><i class="fas fa-bullseye"></i></div>
-            <div>
-                <div class="summary-label">En resumen</div>
-                <p class="summary-text">
-                    El desarrollador moderno debe dejar de ser solo un "escritor de codigo" para convertirse en un <strong>arquitecto y supervisor</strong> que utiliza el CI/CD y el testing como el <strong>"guardián automático"</strong> de su producción.
-                </p>
-            </div>
+    <main class="slide">
+        <div class="slide-content">
+            El autor sostiene que la capacidad de generar código a velocidades masivas es una ventaja competitiva, pero también un riesgo sistémico porque la IA carece de contexto de negocio y sentido de responsabilidad. Por lo tanto, el mensaje principal se articula en tres pilares:
+            <span class="sep"></span>
+            <strong>La IA como generadora, el humano como responsable:</strong> Se enfatiza el Principio de Responsabilidad Profesional, donde el desarrollador es el único responsable legal y profesional del código en producción. La IA genera código rápido, pero no lo <em>"entiende" profundamente</em>.
+            <span class="sep"></span>
+            <strong>El Testing y CI/CD como barreras obligatorias:</strong> Dado que el ritmo de cambio de la IA supera la capacidad de revisión humana manual, es imperativo implementar procesos automáticos de Integración Continua (CI) y Testing. Sin tests, el desarrollo con IA es descrito como <em>"construir sobre arena"</em> o aceptar una <em>"deuda técnica por diseño"</em>.
+            <span class="sep"></span>
+            <strong>Orquestación sobre codificación:</strong> El autor propone que el futuro del desarrollo pertenece a quienes sepan orquestar herramientas inteligentes (como agentes de revisión de código, revisiones de seguridad automáticas con Claude y automatización de lanzamientos) para guiar la tecnología hacia sistemas escalables y seguros.
         </div>
     </main>
 
-    <!-- Navegación de diapositivas -->
     <nav class="slide-nav" aria-label="Navegación de diapositivas">
         <div class="nav-dot active"></div>
         <div class="nav-dot"></div>
@@ -533,11 +313,9 @@
         <div class="nav-dot"></div>
     </nav>
 
-    <!-- Marca de agua -->
     <div class="watermark" aria-hidden="true">InfraTech</div>
 
     <script>
-        // ===== Generar racks de servidor =====
         function fillRack(el, n) {
             const types = ['led-g','led-b','led-o','led-off'];
             for (let i = 0; i < n; i++) {
@@ -563,7 +341,6 @@
         fillRack(document.getElementById('rackL'), 32);
         fillRack(document.getElementById('rackR'), 32);
 
-        // ===== Cables =====
         const cablesEl = document.getElementById('cables');
         for (let i = 0; i < 10; i++) {
             const c = document.createElement('div');
@@ -576,7 +353,6 @@
             cablesEl.appendChild(c);
         }
 
-        // ===== Partículas =====
         const particlesEl = document.getElementById('particles');
         for (let i = 0; i < 25; i++) {
             const p = document.createElement('div');
@@ -588,21 +364,6 @@
             particlesEl.appendChild(p);
         }
 
-        // ===== Hover en pilares: brillo que sigue al mouse =====
-        document.querySelectorAll('.pillar').forEach(card => {
-            card.addEventListener('mousemove', e => {
-                const r = card.getBoundingClientRect();
-                const x = e.clientX - r.left;
-                const y = e.clientY - r.top;
-                card.style.background =
-                    `radial-gradient(circle 220px at ${x}px ${y}px, rgba(0,212,255,0.035), transparent), var(--card-bg)`;
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.background = 'var(--card-bg)';
-            });
-        });
-
-        // ===== Navegación con teclado (flechas) =====
         const dots = document.querySelectorAll('.nav-dot');
         let currentSlide = 0;
 
@@ -613,25 +374,15 @@
         document.addEventListener('keydown', e => {
             if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
                 e.preventDefault();
-                if (currentSlide < dots.length - 1) {
-                    currentSlide++;
-                    setActiveDot(currentSlide);
-                }
+                if (currentSlide < dots.length - 1) { currentSlide++; setActiveDot(currentSlide); }
             } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
                 e.preventDefault();
-                if (currentSlide > 0) {
-                    currentSlide--;
-                    setActiveDot(currentSlide);
-                }
+                if (currentSlide > 0) { currentSlide--; setActiveDot(currentSlide); }
             }
         });
 
-        // Click en dots
         dots.forEach((d, i) => {
-            d.addEventListener('click', () => {
-                currentSlide = i;
-                setActiveDot(currentSlide);
-            });
+            d.addEventListener('click', () => { currentSlide = i; setActiveDot(currentSlide); });
         });
     </script>
 </body>
