@@ -185,14 +185,14 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows: 1fr 1fr;
-            gap: 16px;
+            gap: 14px;
             width: 100%;
-            max-width: 780px;
-            height: clamp(340px, 58vh, 480px);
+            max-width: 840px;
+            height: clamp(380px, 68vh, 580px);
         }
 
         .s3-cell {
-            padding: 22px 24px;
+            padding: 18px 20px;
             background: var(--card-bg);
             border: 1px solid var(--border-glow);
             border-radius: 12px;
@@ -201,8 +201,8 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            font-size: clamp(11.5px, 0.95vw, 13.5px);
-            line-height: 1.7;
+            font-size: clamp(11px, 0.88vw, 13px);
+            line-height: 1.65;
             color: var(--text-secondary);
         }
 
@@ -216,36 +216,30 @@
         .s3-cell::after {
             content: '';
             position: absolute;
-            bottom: -30px; right: -30px;
-            width: 100px; height: 100px;
+            bottom: -40px; right: -40px;
+            width: 120px; height: 120px;
             border-radius: 50%;
-            opacity: 0.04;
+            opacity: 0.035;
             pointer-events: none;
         }
 
-        /* Barra semáforo */
         .s3-cell-1::before { background: linear-gradient(90deg, #ff5252 0%, #ffb300 50%, #00e676 100%); }
         .s3-cell-1::after { background: linear-gradient(135deg, #ff5252, #ffb300, #00e676); }
-
-        /* Verde validación */
         .s3-cell-2::before { background: #00e676; }
         .s3-cell-2::after { background: #00e676; }
-
-        /* Negro/gris */
         .s3-cell-3::before { background: linear-gradient(90deg, #1a1a2e, #3e5f82); }
         .s3-cell-3::after { background: #3e5f82; }
-
-        /* Cian/magenta */
         .s3-cell-4::before { background: linear-gradient(90deg, #00d4ff, #e040fb); }
         .s3-cell-4::after { background: linear-gradient(135deg, #00d4ff, #e040fb); }
 
         .s3-color-name {
-            font-size: 1.05em;
+            font-size: 1.1em;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 8px;
+            flex-shrink: 0;
         }
 
         .s3-cell-1 .s3-color-name { color: #ffb300; }
@@ -261,15 +255,17 @@
         .s3-dot {
             width: 8px; height: 8px;
             border-radius: 50%;
+            flex-shrink: 0;
         }
 
         .s3-sense-label {
-            font-size: 0.85em;
+            font-size: 0.8em;
             font-weight: 700;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 4px;
+            letter-spacing: 1.2px;
+            margin-bottom: 6px;
+            flex-shrink: 0;
         }
 
         .s3-cell em {
@@ -280,30 +276,30 @@
 
         .s3-sub {
             display: block;
-            margin-top: 6px;
-            padding-top: 6px;
-            border-top: 1px solid rgba(10,111,221,0.06);
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(10,111,221,0.05);
+        }
+
+        .s3-sub:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
         }
 
         .s3-sub-label {
-            font-size: 0.85em;
-            font-weight: 600;
-            color: #ff5252;
+            font-size: 0.92em;
+            font-weight: 700;
             margin-right: 4px;
         }
 
-        .s3-sub-label-amber {
-            font-size: 0.85em;
-            font-weight: 600;
-            color: #ffb300;
-            margin-right: 4px;
-        }
+        .s3-sl-red { color: #ff5252; }
+        .s3-sl-amber { color: #ffb300; }
+        .s3-sl-green { color: #00e676; }
 
-        .s3-sub-label-green {
-            font-size: 0.85em;
-            font-weight: 600;
-            color: #00e676;
-            margin-right: 4px;
+        .s3-text-block {
+            flex: 1;
+            overflow: hidden;
         }
 
         /* Indicador */
@@ -384,7 +380,7 @@
             .rack-left, .rack-right { display: none; }
             .watermark { display: none; }
             .slide-indicator { font-size: 9px; }
-            .s3-grid { grid-template-columns: 1fr; height: auto; }
+            .s3-grid { grid-template-columns: 1fr; height: auto; max-width: 500px; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -453,9 +449,11 @@
                         Rojo, Amarillo, Verde
                     </div>
                     <div class="s3-sense-label">Sentido</div>
-                    <span class="s3-sub"><span class="s3-sub-label">Rojo:</span> alerta y máxima prioridad donde el error es inaceptable.</span>
-                    <span class="s3-sub"><span class="s3-sub-label-amber">Amarillo:</span> precaución y revisión necesaria en zonas que requieren atención humana.</span>
-                    <span class="s3-sub"><span class="s3-sub-label-green">Verde:</span> seguridad y fluidez en áreas de bajo riesgo delegables a la IA.</span>
+                    <div class="s3-text-block">
+                        <span class="s3-sub"><span class="s3-sub-label s3-sl-red">Rojo (Lo Crítico):</span> Se utiliza para resaltar elementos donde el error es inaceptable, como la autenticación y la lógica de negocio principal. Aporta un sentido de alerta y máxima prioridad.</span>
+                        <span class="s3-sub"><span class="s3-sub-label s3-sl-amber">Amarillo (Lo Importante):</span> Identifica zonas que requieren atención humana, específicamente casos de borde o código generado por IA que el humano no termina de comprender. Aporta un sentido de precaución y revisión necesaria.</span>
+                        <span class="s3-sub"><span class="s3-sub-label s3-sl-green">Verde (Lo Delegable):</span> Representa áreas de bajo riesgo, como funciones simples o <em>"helpers"</em>, donde se puede confiar más en la automatización de la IA. Comunica seguridad y fluidez.</span>
+                    </div>
                 </div>
                 <div class="s3-cell s3-cell-2">
                     <div class="s3-color-name">
@@ -463,16 +461,22 @@
                         Verde brillante
                     </div>
                     <div class="s3-sense-label">Sentido</div>
-                    Representa la aprobación del <em>"Guardia Automático"</em> (el CI/CD). Se observa en capturas de GitHub Actions donde <em>"All checks have passed"</em> e iconos verdes indican que el código es seguro para ser integrado.
+                    <div class="s3-text-block">
+                        <span class="s3-sub"><span class="s3-sub-label s3-sl-green">Sentido:</span> Representa la aprobación del <em>"Guardia Automático"</em> (el CI/CD).</span>
+                        <span class="s3-sub"><span class="s3-sub-label s3-sl-green">Comunicación:</span> Se observa en capturas de pantalla de GitHub Actions, donde el mensaje <em>"All checks have passed"</em> y los iconos verdes indican que el código es seguro para ser integrado.</span>
+                    </div>
                 </div>
                 <div class="s3-cell s3-cell-3">
                     <div class="s3-color-name">
-                        <span class="s3-dot" style="background:#1a1a2e;border:1px solid #3e5f82;width:10px;height:10px"></span>
+                        <span class="s3-dot" style="background:#0d0d1a;border:1px solid #3e5f82;width:10px;height:10px"></span>
                         <span class="s3-dot" style="background:#3e5f82;width:10px;height:10px"></span>
                         Negro y Gris Oscuro
                     </div>
                     <div class="s3-sense-label">Sentido</div>
-                    Separa el contenido educativo del "ruido" visual, imitando la interfaz de un IDE como Cursor o VS Code. Transmite profesionalismo y rigor técnico, alineado con el <em>"Principio de Responsabilidad Profesional"</em>.
+                    <div class="s3-text-block">
+                        <span class="s3-sub"><span class="s3-sub-label" style="color:#7a9cc0">Diferenciación:</span> Separa el contenido educativo del "ruido" visual, imitando la interfaz de un entorno de desarrollo (IDE) como Cursor o VS Code.</span>
+                        <span class="s3-sub"><span class="s3-sub-label" style="color:#7a9cc0">Comunicación:</span> Transmite un tono de profesionalismo y rigor técnico, alineado con el <em>"Principio de Responsabilidad Profesional"</em> que menciona el autor.</span>
+                    </div>
                 </div>
                 <div class="s3-cell s3-cell-4">
                     <div class="s3-color-name">
@@ -481,7 +485,10 @@
                         Cian y Magenta
                     </div>
                     <div class="s3-sense-label">Sentido</div>
-                    Diferenciación de marca (<em>"BIG school"</em>) y destacado de conceptos clave como <em>"Desarrollo con IA"</em>. Crean una estética moderna y tecnológica, reforzando que la IA es el nuevo estándar operativo en la ingeniería de software.
+                    <div class="s3-text-block">
+                        <span class="s3-sub"><span class="s3-sub-label" style="color:#00d4ff">Aporte:</span> Sirven para la diferenciación de marca y para destacar conceptos clave como <em>"Desarrollo con IA"</em>.</span>
+                        <span class="s3-sub"><span class="s3-sub-label" style="color:#00d4ff">Sentido:</span> Crean una estética moderna y tecnológica, reforzando la idea de que la IA es el nuevo estándar operativo en la ingeniería de software.</span>
+                    </div>
                 </div>
             </div>
         </section>
