@@ -17,8 +17,8 @@
             --text-primary: #dce8ff;
             --text-secondary: #7a9cc0;
             --text-muted: #3e5f82;
-            --card-bg: rgba(6, 17, 31, 0.7);
-            --border-glow: rgba(26, 140, 255, 0.1);
+            --card-bg: rgba(6, 17, 31, 0.75);
+            --border-glow: rgba(26, 140, 255, 0.12);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -180,20 +180,21 @@
             max-width: 400px;
         }
 
-        /* ===== Layout de la diapositiva 3 ===== */
-        .s3-layout {
+        /* ===== Diapositiva 3: grid centrado ===== */
+        .s3-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            max-width: 960px;
+            grid-template-rows: auto auto;
+            gap: 14px;
             width: 100%;
-            font-size: clamp(11px, 0.92vw, 13px);
-            line-height: 1.7;
+            max-width: 880px;
+            font-size: clamp(11px, 0.9vw, 13px);
+            line-height: 1.65;
             color: var(--text-secondary);
         }
 
         .s3-card {
-            padding: 16px 18px;
+            padding: 14px 16px;
             background: var(--card-bg);
             border: 1px solid var(--border-glow);
             border-radius: 10px;
@@ -209,17 +210,17 @@
             height: 2px;
         }
 
-        .s3-card-1 { grid-column: 1 / 2; grid-row: 1 / 3; }
-        .s3-card-1::before { background: linear-gradient(90deg, #ff5252, #ffb300, #00e676); }
-        .s3-card-2::before { background: #00e676; }
-        .s3-card-3::before { background: #3e5f82; }
-        .s3-card-4::before { background: linear-gradient(90deg, #00d4ff, #e040fb); }
+        .s3-c1 { grid-column: 1; grid-row: 1 / 3; }
+        .s3-c1::before { background: linear-gradient(90deg, #ff5252, #ffb300, #00e676); }
+        .s3-c2::before { background: #00e676; }
+        .s3-c3::before { background: #3e5f82; }
+        .s3-c4::before { background: linear-gradient(90deg, #00d4ff, #e040fb); }
 
         .s3-num {
-            font-size: clamp(11px, 0.95vw, 13px);
+            font-size: 1em;
             font-weight: 700;
             color: var(--cyan-accent);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             display: block;
         }
 
@@ -234,15 +235,15 @@
             font-weight: 700;
         }
 
-        .s3-color-red { color: #ff5252; font-weight: 600; }
-        .s3-color-amber { color: #ffb300; font-weight: 600; }
-        .s3-color-green { color: #00e676; font-weight: 600; }
+        .s3-red { color: #ff5252; font-weight: 600; }
+        .s3-amber { color: #ffb300; font-weight: 600; }
+        .s3-green { color: #00e676; font-weight: 600; }
 
-        .s3-mini-sep {
+        .s3-sep {
             display: block;
             height: 1px;
             background: rgba(10,111,221,0.08);
-            margin: 10px 0;
+            margin: 8px 0;
         }
 
         /* Indicador */
@@ -274,7 +275,6 @@
             background: var(--text-muted);
         }
 
-        /* Navegación inferior */
         .slide-nav {
             position: fixed;
             bottom: 28px;
@@ -315,14 +315,14 @@
         }
 
         @media (max-width: 1100px) {
-            .slide { padding: 70px 50px; }
+            .slide { padding: 70px 40px; }
             .rack-left, .rack-right { width: 90px; }
-            .s3-layout { grid-template-columns: 1fr; }
-            .s3-card-1 { grid-column: 1; grid-row: auto; }
+            .s3-grid { grid-template-columns: 1fr; max-width: 560px; }
+            .s3-c1 { grid-column: 1; grid-row: auto; }
         }
 
         @media (max-width: 700px) {
-            .slide { padding: 70px 20px 70px; }
+            .slide { padding: 70px 18px 70px; }
             .rack-left, .rack-right { display: none; }
             .watermark { display: none; }
             .slide-indicator { font-size: 9px; }
@@ -383,39 +383,39 @@
 
         <!-- Diapositiva 03 -->
         <section class="slide" data-slide="2">
-            <div class="s3-layout">
-                <div class="s3-card s3-card-1">
+            <div class="s3-grid">
+                <div class="s3-card s3-c1">
                     <span class="s3-num">1. El Semáforo de Prioridades (Rojo, Amarillo, Verde)</span>
                     En la sección sobre <em>"¿Qué testear cuando programas con IA?"</em>, el autor utiliza un esquema de colores para diferenciar niveles de riesgo y delegación:
-                    <span class="s3-mini-sep"></span>
-                    <span class="s3-color-red">Rojo (Lo Crítico):</span> Se utiliza para resaltar elementos donde el error es inaceptable, como la autenticación y la lógica de negocio principal. Aporta un sentido de alerta y máxima prioridad.
-                    <span class="s3-mini-sep"></span>
-                    <span class="s3-color-amber">Amarillo (Lo Importante):</span> Identifica zonas que requieren atención humana, específicamente casos de borde o código generado por IA que el humano no termina de comprender. Aporta un sentido de precaución y revisión necesaria.
-                    <span class="s3-mini-sep"></span>
-                    <span class="s3-color-green">Verde (Lo Delegable):</span> Representa áreas de bajo riesgo, como funciones simples o <em>"helpers"</em>, donde se puede confiar más en la automatización de la IA. Comunica seguridad y fluidez.
+                    <span class="s3-sep"></span>
+                    <span class="s3-red">Rojo (Lo Crítico):</span> Se utiliza para resaltar elementos donde el error es inaceptable, como la autenticación y la lógica de negocio principal. Aporta un sentido de alerta y máxima prioridad.
+                    <span class="s3-sep"></span>
+                    <span class="s3-amber">Amarillo (Lo Importante):</span> Identifica zonas que requieren atención humana, específicamente casos de borde o código generado por IA que el humano no termina de comprender. Aporta un sentido de precaución y revisión necesaria.
+                    <span class="s3-sep"></span>
+                    <span class="s3-green">Verde (Lo Delegable):</span> Representa áreas de bajo riesgo, como funciones simples o <em>"helpers"</em>, donde se puede confiar más en la automatización de la IA. Comunica seguridad y fluidez.
                 </div>
-                <div class="s3-card s3-card-2">
+                <div class="s3-card s3-c2">
                     <span class="s3-num">2. El Verde de "Éxito" (Validación)</span>
                     El documento utiliza el verde brillante para comunicar el estado óptimo del sistema:
-                    <span class="s3-mini-sep"></span>
+                    <span class="s3-sep"></span>
                     <strong>Sentido:</strong> Representa la aprobación del <em>"Guardia Automático"</em> (el CI/CD).
-                    <span class="s3-mini-sep"></span>
+                    <span class="s3-sep"></span>
                     <strong>Comunicación:</strong> Se observa en capturas de pantalla de GitHub Actions, donde el mensaje <em>"All checks have passed"</em> y los iconos verdes indican que el código es seguro para ser integrado.
                 </div>
-                <div class="s3-card s3-card-3">
+                <div class="s3-card s3-c3">
                     <span class="s3-num">3. El Negro y Gris Oscuro (Estructura y Seriedad)</span>
                     La paleta de fondo y los bloques de texto utilizan tonos oscuros:
-                    <span class="s3-mini-sep"></span>
+                    <span class="s3-sep"></span>
                     <strong>Diferenciación:</strong> Separa el contenido educativo del "ruido" visual, imitando la interfaz de un entorno de desarrollo (IDE) como Cursor o VS Code.
-                    <span class="s3-mini-sep"></span>
+                    <span class="s3-sep"></span>
                     <strong>Comunicación:</strong> Transmite un tono de profesionalismo y rigor técnico, alineado con el <em>"Principio de Responsabilidad Profesional"</em> que menciona el autor.
                 </div>
-                <div class="s3-card s3-card-4">
+                <div class="s3-card s3-c4">
                     <span class="s3-num">4. Colores de Identidad y Marca (Cian y Magenta)</span>
                     Estos colores aparecen en los logotipos de <em>"BIG school"</em> y en los acentos visuales del curso:
-                    <span class="s3-mini-sep"></span>
+                    <span class="s3-sep"></span>
                     <strong>Aporte:</strong> Sirven para la diferenciación de marca y para destacar conceptos clave como <em>"Desarrollo con IA"</em>.
-                    <span class="s3-mini-sep"></span>
+                    <span class="s3-sep"></span>
                     <strong>Sentido:</strong> Crean una estética moderna y tecnológica, reforzando la idea de que la IA es el nuevo estándar operativo en la ingeniería de software.
                 </div>
             </div>
