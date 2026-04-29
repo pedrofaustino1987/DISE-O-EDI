@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diapositiva 02</title>
+    <title>Diapositiva 03</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
@@ -139,7 +139,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 80px 100px;
+            padding: 70px 100px;
             opacity: 0;
             transform: translateY(40px);
             pointer-events: none;
@@ -154,8 +154,8 @@
 
         .slide-content {
             max-width: 920px;
-            font-size: clamp(14px, 1.15vw, 16.5px);
-            line-height: 1.9;
+            font-size: clamp(12.5px, 1.05vw, 15px);
+            line-height: 1.85;
             color: var(--text-secondary);
         }
 
@@ -174,9 +174,19 @@
             display: block;
             height: 1px;
             background: linear-gradient(90deg, rgba(0,212,255,0.15), rgba(10,111,221,0.08), transparent);
-            margin: 20px 0;
+            margin: 16px 0;
             max-width: 400px;
         }
+
+        .slide-content .num-label {
+            color: var(--cyan-accent);
+            font-weight: 700;
+            font-size: clamp(13px, 1.1vw, 15.5px);
+        }
+
+        .slide-content .color-red { color: #ff5252; font-weight: 600; }
+        .slide-content .color-amber { color: #ffb300; font-weight: 600; }
+        .slide-content .color-green { color: #00e676; font-weight: 600; }
 
         /* Indicador */
         .slide-indicator {
@@ -248,12 +258,12 @@
         }
 
         @media (max-width: 1100px) {
-            .slide { padding: 80px 50px; }
+            .slide { padding: 70px 50px; }
             .rack-left, .rack-right { width: 90px; }
         }
 
         @media (max-width: 700px) {
-            .slide { padding: 80px 24px 80px; }
+            .slide { padding: 70px 20px 70px; }
             .rack-left, .rack-right { display: none; }
             .watermark { display: none; }
             .slide-indicator { font-size: 9px; }
@@ -312,6 +322,41 @@
             </div>
         </section>
 
+        <!-- Diapositiva 03 -->
+        <section class="slide" data-slide="2">
+            <div class="slide-content">
+                <span class="num-label">1. El Semáforo de Prioridades (Rojo, Amarillo, Verde)</span><br>
+                En la sección sobre <em>"¿Qué testear cuando programas con IA?"</em>, el autor utiliza un esquema de colores para diferenciar niveles de riesgo y delegación:
+                <span class="sep"></span>
+                <span class="color-red">Rojo (Lo Crítico):</span> Se utiliza para resaltar elementos donde el error es inaceptable, como la autenticación y la lógica de negocio principal. Aporta un sentido de alerta y máxima prioridad.
+                <span class="sep"></span>
+                <span class="color-amber">Amarillo (Lo Importante):</span> Identifica zonas que requieren atención humana, específicamente casos de borde o código generado por IA que el humano no termina de comprender. Aporta un sentido de precaución y revisión necesaria.
+                <span class="sep"></span>
+                <span class="color-green">Verde (Lo Delegable):</span> Representa áreas de bajo riesgo, como funciones simples o <em>"helpers"</em>, donde se puede confiar más en la automatización de la IA. Comunica seguridad y fluidez.
+                <span class="sep"></span>
+                <span class="num-label">2. El Verde de "Éxito" (Validación)</span><br>
+                El documento utiliza el verde brillante para comunicar el estado óptimo del sistema:
+                <span class="sep"></span>
+                <strong>Sentido:</strong> Representa la aprobación del <em>"Guardia Automático"</em> (el CI/CD).
+                <span class="sep"></span>
+                <strong>Comunicación:</strong> Se observa en capturas de pantalla de GitHub Actions, donde el mensaje <em>"All checks have passed"</em> y los iconos verdes indican que el código es seguro para ser integrado.
+                <span class="sep"></span>
+                <span class="num-label">3. El Negro y Gris Oscuro (Estructura y Seriedad)</span><br>
+                La paleta de fondo y los bloques de texto utilizan tonos oscuros:
+                <span class="sep"></span>
+                <strong>Diferenciación:</strong> Separa el contenido educativo del "ruido" visual, imitando la interfaz de un entorno de desarrollo (IDE) como Cursor o VS Code.
+                <span class="sep"></span>
+                <strong>Comunicación:</strong> Transmite un tono de profesionalismo y rigor técnico, alineado con el <em>"Principio de Responsabilidad Profesional"</em> que menciona el autor.
+                <span class="sep"></span>
+                <span class="num-label">4. Colores de Identidad y Marca (Cian y Magenta)</span><br>
+                Estos colores aparecen en los logotipos de <em>"BIG school"</em> y en los acentos visuales del curso:
+                <span class="sep"></span>
+                <strong>Aporte:</strong> Sirven para la diferenciación de marca y para destacar conceptos clave como <em>"Desarrollo con IA"</em>.
+                <span class="sep"></span>
+                <strong>Sentido:</strong> Crean una estética moderna y tecnológica, reforzando la idea de que la IA es el nuevo estándar operativo en la ingeniería de software.
+            </div>
+        </section>
+
     </div>
 
     <nav class="slide-nav" aria-label="Navegación de diapositivas">
@@ -327,23 +372,22 @@
     <div class="watermark" aria-hidden="true">InfraTech</div>
 
     <script>
-        /* ===== Racks ===== */
         function fillRack(el, n) {
-            const types = ['led-g','led-b','led-o','led-off'];
-            for (let i = 0; i < n; i++) {
-                const u = document.createElement('div');
+            var types = ['led-g','led-b','led-o','led-off'];
+            for (var i = 0; i < n; i++) {
+                var u = document.createElement('div');
                 u.className = 'server-unit';
-                const nl = 2 + Math.floor(Math.random() * 2);
-                for (let j = 0; j < nl; j++) {
-                    const l = document.createElement('div');
+                var nl = 2 + Math.floor(Math.random() * 2);
+                for (var j = 0; j < nl; j++) {
+                    var l = document.createElement('div');
                     l.className = 'led ' + types[Math.floor(Math.random() * types.length)];
                     l.style.animationDelay = (Math.random() * 3) + 's';
                     l.style.animationDuration = (1.5 + Math.random() * 2.5) + 's';
                     u.appendChild(l);
                 }
-                const ns = 1 + Math.floor(Math.random() * 3);
-                for (let s = 0; s < ns; s++) {
-                    const sl = document.createElement('div');
+                var ns = 1 + Math.floor(Math.random() * 3);
+                for (var s = 0; s < ns; s++) {
+                    var sl = document.createElement('div');
                     sl.className = 'srv-slot';
                     u.appendChild(sl);
                 }
@@ -353,10 +397,9 @@
         fillRack(document.getElementById('rackL'), 32);
         fillRack(document.getElementById('rackR'), 32);
 
-        /* ===== Cables ===== */
-        const cablesEl = document.getElementById('cables');
-        for (let i = 0; i < 10; i++) {
-            const c = document.createElement('div');
+        var cablesEl = document.getElementById('cables');
+        for (var i = 0; i < 10; i++) {
+            var c = document.createElement('div');
             c.className = 'cable-line';
             c.style.top = (8 + Math.random() * 84) + '%';
             c.style.left = '12%';
@@ -366,10 +409,9 @@
             cablesEl.appendChild(c);
         }
 
-        /* ===== Partículas ===== */
-        const particlesEl = document.getElementById('particles');
-        for (let i = 0; i < 25; i++) {
-            const p = document.createElement('div');
+        var particlesEl = document.getElementById('particles');
+        for (var i = 0; i < 25; i++) {
+            var p = document.createElement('div');
             p.className = 'particle';
             p.style.left = (Math.random() * 100) + '%';
             p.style.animationDuration = (10 + Math.random() * 14) + 's';
@@ -378,36 +420,30 @@
             particlesEl.appendChild(p);
         }
 
-        /* ===== Navegación entre diapositivas ===== */
-        const slides = document.querySelectorAll('.slide');
-        const dots = document.querySelectorAll('.nav-dot');
-        const indicatorCurrent = document.querySelector('.slide-indicator .current');
-        let current = 0;
-        let transitioning = false;
+        var slides = document.querySelectorAll('.slide');
+        var dots = document.querySelectorAll('.nav-dot');
+        var indicatorCurrent = document.querySelector('.slide-indicator .current');
+        var current = 0;
+        var transitioning = false;
 
         function goTo(idx) {
             if (idx < 0 || idx >= slides.length || idx === current || transitioning) return;
-
             transitioning = true;
-            const direction = idx > current ? 1 : -1;
-            const oldSlide = slides[current];
-            const newSlide = slides[idx];
+            var direction = idx > current ? 1 : -1;
+            var oldSlide = slides[current];
+            var newSlide = slides[idx];
 
-            // Nueva slide: posición de partida sin transición
             newSlide.style.transition = 'none';
             newSlide.style.transform = 'translateY(' + (direction * 40) + 'px)';
             newSlide.style.opacity = '0';
             newSlide.classList.add('active');
 
-            // Forzar reflow para que el navegador registre el estado inicial
             void newSlide.offsetHeight;
 
-            // Restaurar transición y limpiar inline para que CSS de .active tome control
             newSlide.style.transition = '';
             newSlide.style.transform = '';
             newSlide.style.opacity = '';
 
-            // Vieja slide: la transición CSS de .slide la anima al salir
             oldSlide.classList.remove('active');
 
             current = idx;
